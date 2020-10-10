@@ -1,9 +1,7 @@
-package ramo.klevis.ui;
+package ramo.klevis;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -13,7 +11,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author sylsau
  */
-public class DrawArea extends JComponent {
+public class DrawArea extends JPanel {
 
     private final Font sansSerifBold = new Font("SansSerif", Font.BOLD, 18);
     // Image in which we're going to draw
@@ -22,7 +20,9 @@ public class DrawArea extends JComponent {
     private Graphics2D g2;
     // Mouse coordinates
     private int currentX, currentY, oldX, oldY;
+
     public DrawArea() {
+        setLayout(new GridLayout());
         setDoubleBuffered(false);
         setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(),
                 "Please draw a digit",
@@ -42,6 +42,8 @@ public class DrawArea extends JComponent {
                 currentX = e.getX();
                 currentY = e.getY();
 
+                Config.LOGGER.info("Mouse Position: (" + currentX + ", " + currentY + ")");
+
                 if (g2 != null) {
                     g2.setStroke(new BasicStroke(10));
                     // draw line if g2 context not null
@@ -57,6 +59,8 @@ public class DrawArea extends JComponent {
     }
 
     protected void paintComponent(Graphics g) {
+        Config.LOGGER.info("Repainting the Drawing Area!");
+//        super.paintComponent(g);
         if (image == null) {
             // image to draw null ==> we create
             image = createImage(getSize().width, getSize().height);

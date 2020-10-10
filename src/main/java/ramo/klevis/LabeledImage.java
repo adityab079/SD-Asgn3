@@ -1,4 +1,4 @@
-package ramo.klevis.data;
+package ramo.klevis;
 
 import org.apache.spark.ml.linalg.Vector;
 import org.apache.spark.ml.linalg.Vectors;
@@ -9,13 +9,12 @@ import java.io.Serializable;
  * Created by klevis.ramo on 11/27/2017.
  */
 public class LabeledImage implements Serializable {
-    private final double[] meanNormalizedPixel;
     private final double[] pixels;
     private double label;
     private Vector features;
 
     public LabeledImage(int label, double[] pixels) {
-        meanNormalizedPixel = meanNormalizeFeatures(pixels);
+        double[] meanNormalizedPixel = meanNormalizeFeatures(pixels);
         this.pixels = pixels;
         features = Vectors.dense(meanNormalizedPixel);
         this.label = label;

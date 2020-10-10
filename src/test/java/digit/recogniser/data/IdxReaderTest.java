@@ -1,16 +1,16 @@
 package digit.recogniser.data;
 
 import org.junit.Test;
-import ramo.klevis.data.IdxReader;
-import ramo.klevis.data.LabeledImage;
+import ramo.klevis.IdxReader;
+import ramo.klevis.LabeledImage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
-import static ramo.klevis.data.IdxReader.INPUT_IMAGE_PATH;
-import static ramo.klevis.data.IdxReader.INPUT_LABEL_PATH;
+import static ramo.klevis.Config.INPUT_IMAGE_PATH;
+import static ramo.klevis.Config.INPUT_LABEL_PATH;
 
 /**
  * @author (created on 12 / 7 / 2017).

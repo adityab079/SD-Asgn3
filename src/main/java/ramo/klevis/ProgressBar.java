@@ -1,4 +1,4 @@
-package ramo.klevis.ui;
+package ramo.klevis;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,22 +10,22 @@ public class ProgressBar {
 
     private final JFrame mainFrame;
     private JProgressBar progressBar;
-    private boolean unDecoreate = false;
+    private boolean unDecorated = false;
 
     public ProgressBar(JFrame mainFrame) {
         this.mainFrame = mainFrame;
         progressBar = createProgressBar(mainFrame);
     }
 
-    public ProgressBar(JFrame mainFrame, boolean unDecoreate) {
+    public ProgressBar(JFrame mainFrame, boolean unDecorated) {
         this.mainFrame = mainFrame;
         progressBar = createProgressBar(mainFrame);
-        this.unDecoreate = unDecoreate;
+        this.unDecorated = unDecorated;
     }
 
     public void showProgressBar(String msg) {
         SwingUtilities.invokeLater(() -> {
-            if (unDecoreate) {
+            if (unDecorated) {
                 mainFrame.setLocationRelativeTo(null);
                 mainFrame.setUndecorated(true);
             }
@@ -34,8 +34,8 @@ public class ProgressBar {
             progressBar.setStringPainted(true);
             progressBar.setIndeterminate(true);
             progressBar.setVisible(true);
-            mainFrame.add(progressBar, BorderLayout.NORTH);
-            if (unDecoreate) {
+            mainFrame.add(progressBar, BorderLayout.WEST);
+            if (unDecorated) {
                 mainFrame.pack();
                 mainFrame.setVisible(true);
             }
@@ -47,11 +47,13 @@ public class ProgressBar {
     private JProgressBar createProgressBar(JFrame mainFrame) {
         JProgressBar jProgressBar = new JProgressBar(JProgressBar.HORIZONTAL);
         jProgressBar.setVisible(false);
-        mainFrame.add(jProgressBar, BorderLayout.NORTH);
+        mainFrame.add(jProgressBar, BorderLayout.WEST);
         return jProgressBar;
     }
 
     public void setVisible(boolean visible) {
+
         progressBar.setVisible(visible);
+        mainFrame.dispose();
     }
 }
