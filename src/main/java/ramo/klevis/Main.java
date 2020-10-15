@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public class Main extends JFrame {
 
-
     private NeuralNetwork nn;
     private ConvolutionalNeuralNetwork cnn;
     private SparkSession sparkSession;
@@ -50,9 +49,7 @@ public class Main extends JFrame {
         swingLogHandler.addLogSubscriber(mainPanel);
         mainFrame.setVisibleWithSystemSettings();
 
-
         Config.LOGGER.addHandler(swingLogHandler);
-
         Config.LOGGER.info("Application is Starting ... ");
 
         ProgressBar progressBar = new ProgressBar(new JFrame(), true);
@@ -64,7 +61,7 @@ public class Main extends JFrame {
         Config.LOGGER.info("Application Started ... ");
     }
 
-    public void setVisibleWithSystemSettings(){
+    public void setVisibleWithSystemSettings() {
         setTitle("Digit Recognizer");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
@@ -86,17 +83,27 @@ public class Main extends JFrame {
         HashMap<String, String> hadoopEnvSetUp = new HashMap<>();
         hadoopEnvSetUp.put("HADOOP_HOME", new File(Config.HADOOP_2_8_1).getAbsolutePath());
         Class<?> processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment");
+
+        setEnvfield(hadoopEnvSetUp, processEnvironmentClass);
+        setCaseInsEnvfield(hadoopEnvSetUp, processEnvironmentClass);
+    }
+
+    private static void setEnvfield(HashMap<String, String> hadoopEnvSetUp, Class<?> processEnvironmentClass) throws NoSuchFieldException, ClassNotFoundException, IllegalAccessException {
         Field theEnvironmentField = processEnvironmentClass.getDeclaredField("theEnvironment");
         theEnvironmentField.setAccessible(true);
         Map<String, String> env = (Map<String, String>) theEnvironmentField.get(null);
         env.clear();
         env.putAll(hadoopEnvSetUp);
+    }
+
+    private static void setCaseInsEnvfield(HashMap<String, String> hadoopEnvSetUp, Class<?> processEnvironmentClass) throws NoSuchFieldException, ClassNotFoundException, IllegalAccessException {
         Field theCaseInsensitiveEnvironmentField = processEnvironmentClass.getDeclaredField("theCaseInsensitiveEnvironment");
         theCaseInsensitiveEnvironmentField.setAccessible(true);
         Map<String, String> cienv = (Map<String, String>) theCaseInsensitiveEnvironmentField.get(null);
         cienv.clear();
         cienv.putAll(hadoopEnvSetUp);
     }
+
 
     private void initSparkSession() {
         if (sparkSession == null) {

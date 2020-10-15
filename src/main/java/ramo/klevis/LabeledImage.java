@@ -50,14 +50,6 @@ public class LabeledImage implements Serializable {
         return features;
     }
 
-    public double getLabel() {
-        return label;
-    }
-
-    public void setLabel(double label) {
-        this.label = label;
-    }
-
     @Override
     public String toString() {
         return "LabeledImage{" +
