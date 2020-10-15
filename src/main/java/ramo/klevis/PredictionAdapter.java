@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class PredictionAdapter {
+public class PredictionAdapter implements Predictor {
 
     private ArrayList<Model> models = new ArrayList<>();
 

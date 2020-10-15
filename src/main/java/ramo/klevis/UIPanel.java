@@ -13,9 +13,9 @@ public class UIPanel extends JPanel implements LogSubscriber{
     private JLabel predictionLabel;
     private JTextArea logArea;
 
-    private final PredictionAdapter predictionAdapter;
+    private final Predictor predictionAdapter;
 
-    public UIPanel(PredictionAdapter predictionAdapter){
+    public UIPanel(Predictor predictionAdapter){
         this.predictionAdapter = predictionAdapter;
         setLayout(new BorderLayout());
         initDrawPanel();

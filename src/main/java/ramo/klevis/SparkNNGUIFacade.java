@@ -14,11 +14,9 @@ import java.util.Map;
 
 public class SparkNNGUIFacade extends JFrame {
 
-    private NeuralNetwork nn;
-    private ConvolutionalNeuralNetwork cnn;
     private SparkSession sparkSession;
-    private PredictionAdapter predictionAdapter;
-    private SwingLogHandler swingLogHandler;
+    private Predictor predictionAdapter;
+    private final SwingLogHandler swingLogHandler;
 
 
     public SparkNNGUIFacade(){
@@ -52,9 +50,9 @@ public class SparkNNGUIFacade extends JFrame {
 
     private void initSession() throws Exception {
         initSparkSession();
-        nn = NeuralNetwork.getInstance();
+        NeuralNetwork nn = NeuralNetwork.getInstance();
         nn.init();
-        cnn = ConvolutionalNeuralNetwork.getInstance();
+        ConvolutionalNeuralNetwork cnn = ConvolutionalNeuralNetwork.getInstance();
         cnn.init();
 
         predictionAdapter.addModel(cnn);

@@ -12,11 +12,6 @@ public class ProgressBar {
     private JProgressBar progressBar;
     private boolean unDecorated = false;
 
-    public ProgressBar(JFrame mainFrame) {
-        this.mainFrame = mainFrame;
-        progressBar = createProgressBar(mainFrame);
-    }
-
     public ProgressBar(JFrame mainFrame, boolean unDecorated) {
         this.mainFrame = mainFrame;
         progressBar = createProgressBar(mainFrame);
